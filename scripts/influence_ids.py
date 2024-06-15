@@ -39,10 +39,8 @@ def run():
 
     print("Loading %s..." % filename)
     legislators = load_data(filename)
-
-
-    api_file = open('cache/sunlight_api_key.txt','r')
-    api_key = api_file.read()
+    with open('cache/sunlight_api_key.txt','r') as api_file:
+        api_key = api_file.read()
 
 
     for m in legislators:
