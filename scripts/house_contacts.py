@@ -2,12 +2,12 @@
 
 # Update current congressmember's contact info from clerk XML feed
 
-import requests
 import lxml
 import re
 from datetime import datetime
 
 from utils import load_data, save_data, parse_date
+from security import safe_requests
 
 def run():
 	today = datetime.now().date()
@@ -15,7 +15,7 @@ def run():
 	y = load_data("legislators-current.yaml")
 
 	# TODO use download util?
-	xml = requests.get("http://clerk.house.gov/xml/lists/MemberData.xml", timeout=60)
+	xml = safe_requests.get("http://clerk.house.gov/xml/lists/MemberData.xml", timeout=60)
 	#xml = requests.get("https://clerk.house.gov/xml/lists/unofficial-118-member-elect-data.xml")
 	root=lxml.etree.fromstring(xml.content)
 
