@@ -116,11 +116,8 @@ def main():
 
 
   def resolveyt():
-    # To avoid hitting quota limits, register for a YouTube 2.0 API key at
-    # https://code.google.com/apis/youtube/dashboard
-    # and put it below
-    api_file = open('cache/youtube_api_key','r')
-    api_key = api_file.read()
+    with open('cache/youtube_api_key','r') as api_file:
+      api_key = api_file.read()
 
     bioguide = utils.flags().get('bioguide', None)
 
@@ -204,9 +201,8 @@ def main():
     updated_media = rtyaml.RtYamlList()
     if hasattr(media, '__initial_comment_block'):
       updated_media.__initial_comment_block = getattr(media, '__initial_comment_block')
-
-    client_id_file = open('cache/instagram_client_id','r')
-    client_id = client_id_file.read()
+    with open('cache/instagram_client_id','r') as client_id_file:
+      client_id = client_id_file.read()
 
     bioguide = utils.flags().get('bioguide', None)
 
