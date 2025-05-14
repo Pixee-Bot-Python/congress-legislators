@@ -1,6 +1,7 @@
 # Helpful functions for finding data about members and committees
 
 import yaml
+import fickling
 
 CURRENT_CONGRESS = 115
 states = {
@@ -412,7 +413,7 @@ def yaml_load(path, use_cache=True):
     if use_cache and os.path.exists(path + ".pickle"):
 
         try:
-          store = pickle.load(open(path + ".pickle", 'rb'))
+          store = fickling.load(open(path + ".pickle", 'rb'))
           if store["hash"] == h:
             return store["data"]
         except EOFError:
