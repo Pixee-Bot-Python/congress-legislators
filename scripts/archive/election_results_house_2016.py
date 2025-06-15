@@ -1,5 +1,6 @@
-import collections, requests, lxml
+import collections, lxml
 from utils import load_data, save_data
+from security import safe_requests
 
 try:
 	from yaml import CLoader
@@ -20,7 +21,7 @@ for entry in historical + current:
 govtrack_id = max(p['id']['govtrack'] for p in historical+current)
 
 # load members-elect
-xml = requests.get("http://clerk.house.gov/member_info/unofficial-115-member-elect-data.xml", timeout=60)
+xml = safe_requests.get("http://clerk.house.gov/member_info/unofficial-115-member-elect-data.xml", timeout=60)
 root=lxml.etree.fromstring(xml.content)
 
 elected = []
